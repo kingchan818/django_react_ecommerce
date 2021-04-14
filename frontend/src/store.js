@@ -6,12 +6,18 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 import { productReducer } from './reducer/productReducer';
 import { productDetialReducer } from './reducer/productDetial';
+import { cartReducer } from './reducer/cartReducer';
 const reducer = combineReducers({
     productList: productReducer,
     productDetial: productDetialReducer,
+    cart: cartReducer,
 });
 
-const initialState = {};
+const cartItemsFromStorage = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')) : [];
+
+const initialState = {
+    cart: { cartItems: cartItemsFromStorage },
+};
 
 const middelWare = [thunk];
 
